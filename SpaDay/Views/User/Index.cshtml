@@ -1,0 +1,12 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<h4>Welcome, @ViewBag.username</h4>
+<p>Email: @ViewBag.email</p>
+<p>Date Joined: @ViewBag.dateCreated</p>
+<a asp-controller="Spa" asp-action="Index">Click to see our services</a>
