@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SpaDay.Models;
+using SpaDay.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,41 +18,36 @@ namespace SpaDay.Controllers
 
         public IActionResult Add()
         {
-            return View();
+            AddUserViewModel addUserViewModel = new AddUserViewModel();
+            return View(addUserViewModel);
         }
 
 
         [HttpPost("/User")]
-        public IActionResult SubmitAddUserForm(User newUser, string verify)
+        public IActionResult SubmitAddUserForm(AddUserViewModel addUserViewModel)
         {
 
-            if (newUser.Password == verify)
+            if (ModelState.IsValid)
             {
+                
+                    User newUser = new User
+                    {
+                        Username = addUserViewModel.Username,
+                        Email = addUserViewModel.Email,
+                        Password = addUserViewModel.Password
+                    };
+                    return View("Index", newUser);
+                }
+            return View("Add", addUserViewModel);
 
-                ViewBag.username = newUser.Username;
-                ViewBag.email = newUser.Email;
-                ViewBag.dateCreated = newUser.DateCreated;
-                return View("Index");
-            }
-            else
-            {
+        }
 
-                ViewBag.error = "Password does not match";
-                ViewBag.username = newUser.Username;
-                ViewBag.email = newUser.Email;
-                ViewBag.password = newUser.Password;
+            
 
-
-
-
-
-                return View("Add");
-
-            }
+        }
 
 
 
 
         }
-    }
-}
+    

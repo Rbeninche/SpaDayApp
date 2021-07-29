@@ -13,11 +13,7 @@ namespace SpaDay.Models
 
         public string Password { get; set; }
 
-        private DateTime? dateCreated = null;
-
-        public DateTime DateCreated => this.dateCreated.HasValue
-                   ? this.dateCreated.Value
-                   : DateTime.Now;
+        
 
 
     }
